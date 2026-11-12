@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AcademicWrite AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="logo">
+            <span>📚</span>
+            <h1>AcademicWrite AI</h1>
+        </div>
+
+        <p>
+            AI-Powered Academic Writing Enhancement & Refinement
+        </p>
+
+    </header>
+
+
+    <!-- MAIN EDITOR -->
+    <div class="editor-card">
+
+        <div class="section-title">
+            <h2>Academic Writing Editor</h2>
+
+            <span id="wordCount">
+                0 words
+            </span>
+        </div>
+
+
+        <!-- TEXT INPUT -->
+
+        <label class="input-label">
+            Enter or paste your academic text
+        </label>
+
+        <textarea
+            id="textInput"
+            placeholder="Write or paste your academic content here...
+
+Example:
+Students nowadays use internet for study. It provide many information but students cannot always determine whether the information is reliable.">
+        </textarea>
+
+
+        <!-- WRITING TOOLS -->
+
+        <div class="tools-section">
+
+            <h3>Writing Enhancement Tools</h3>
+
+            <p class="tools-description">
+                Select what you want AI to improve
+            </p>
+
+
+            <div class="tool-grid">
+
+                <button class="tool-btn"
+                        data-action="grammar">
+
+                    <span class="tool-icon">✓</span>
+
+                    <span>
+                        <strong>Correct Grammar</strong>
+                        <small>Fix grammar & punctuation</small>
+                    </span>
+
+                </button>
+
+
+                <button class="tool-btn"
+                        data-action="sentence">
+
+                    <span class="tool-icon">📝</span>
+
+                    <span>
+                        <strong>Improve Sentence</strong>
+                        <small>Improve sentence structure</small>
+                    </span>
+
+                </button>
+
+
+                <button class="tool-btn"
+                        data-action="synonyms">
+
+                    <span class="tool-icon">🔤</span>
+
+                    <span>
+                        <strong>Find Synonyms</strong>
+                        <small>Use better vocabulary</small>
+                    </span>
+
+                </button>
+
+
+                <button class="tool-btn"
+                        data-action="academic">
+
+                    <span class="tool-icon">🎓</span>
+
+                    <span>
+                        <strong>Academic Tone</strong>
+                        <small>Make writing scholarly</small>
+                    </span>
+
+                </button>
+
+
+                <button class="tool-btn"
+                        data-action="clarity">
+
+                    <span class="tool-icon">💡</span>
+
+                    <span>
+                        <strong>Improve Clarity</strong>
+                        <small>Make ideas clearer</small>
+                    </span>
+
+                </button>
+
+
+                <button class="tool-btn"
+                        data-action="coherence">
+
+                    <span class="tool-icon">🔗</span>
+
+                    <span>
+                        <strong>Improve Coherence</strong>
+                        <small>Improve logical flow</small>
+                    </span>
+
+                </button>
+
+
+                <button class="tool-btn"
+                        data-action="concise">
+
+                    <span class="tool-icon">✂️</span>
+
+                    <span>
+                        <strong>Make Concise</strong>
+                        <small>Remove unnecessary words</small>
+                    </span>
+
+                </button>
+
+
+                <button class="tool-btn complete"
+                        data-action="complete">
+
+                    <span class="tool-icon">✨</span>
+
+                    <span>
+                        <strong>Complete Enhancement</strong>
+                        <small>Improve everything</small>
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI MODEL SELECTION -->
+
+        <div class="model-section">
+
+            <h3>AI Model</h3>
+
+            <div class="model-options">
+
+                <label>
+                    <input
+                        type="radio"
+                        name="model"
+                        value="all"
+                        checked>
+
+                    All AI Models
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="model"
+                        value="openai">
+
+                    OpenAI GPT
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="model"
+                        value="gemini">
+
+                    Google Gemini
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="model"
+                        value="huggingface">
+
+                    Hugging Face
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div id="statusMessage"></div>
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    <div class="result-card">
+
+        <div class="result-header">
+
+            <div>
+                <h2>Enhanced Result</h2>
+
+                <p>
+                    AI-generated improvement will appear here
+                </p>
+            </div>
+
+            <button id="copyBtn">
+                📋 Copy
+            </button>
+
+        </div>
+
+
+        <!-- SINGLE RESULT -->
+
+        <div id="singleResult"
+             class="result-content">
+
+            Your enhanced text will appear here...
+
+        </div>
+
+
+        <!-- THREE AI RESULTS -->
+
+        <div id="aiComparison"
+             class="ai-comparison">
+
+            <div class="ai-card">
+
+                <div class="ai-card-header">
+                    <h3>🤖 OpenAI GPT</h3>
+                </div>
+
+                <div id="openaiResult">
+                    Waiting for result...
+                </div>
+
+            </div>
+
+
+            <div class="ai-card">
+
+                <div class="ai-card-header">
+                    <h3>✨ Google Gemini</h3>
+                </div>
+
+                <div id="geminiResult">
+                    Waiting for result...
+                </div>
+
+            </div>
+
+
+            <div class="ai-card">
+
+                <div class="ai-card-header">
+                    <h3>🧠 Hugging Face</h3>
+                </div>
+
+                <div id="huggingfaceResult">
+                    Waiting for result...
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
